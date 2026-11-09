@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Post;
 use App\Models\CommunityMember;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -36,4 +37,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(CommunityMember::class);
     }
+    /**
+
+ * Relación: una comunidad puede tener muchas publicaciones.
+ */
+public function posts()
+{
+    return $this->hasMany(Post::class);
+}
 }
