@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\CommunityMember;
 use Database\Factories\UserFactory;
@@ -44,5 +45,12 @@ class User extends Authenticatable
 public function posts()
 {
     return $this->hasMany(Post::class);
+}
+ /**
+ * Relación: un usuario puede escribir muchos comentarios.
+ */
+public function comments()
+{
+    return $this->hasMany(Comment::class);
 }
 }
