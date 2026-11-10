@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\ReactionController;
+use App\Http\Controllers\MessageController;
 
 Route::apiResource('games', GameController::class);
 Route::apiResource('communities', CommunityController::class);
@@ -16,3 +17,4 @@ Route::apiResource('posts', PostController::class);
 Route::apiResource('comments', CommentController::class);
 Route::apiResource('guides', GuideController::class);
 Route::apiResource('reactions', ReactionController::class);
+Route::apiResource('messages', MessageController::class);

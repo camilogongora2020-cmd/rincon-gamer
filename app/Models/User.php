@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Message;
 use App\Models\Reaction;
 use App\Models\Guide;
 use App\Models\Comment;
@@ -70,5 +71,20 @@ public function guides()
 public function reactions()
 {
     return $this->hasMany(Reaction::class);
+}
+  /**
+ * Mensajes enviados por el usuario.
+ */
+public function sentMessages()
+{
+    return $this->hasMany(Message::class, 'sender_id');
+}
+
+/**
+ * Mensajes recibidos por el usuario.
+ */
+public function receivedMessages()
+{
+    return $this->hasMany(Message::class, 'receiver_id');
 }
 }
