@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Guide;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\CommunityMember;
@@ -52,5 +53,14 @@ public function posts()
 public function comments()
 {
     return $this->hasMany(Comment::class);
+
 }
+  /**
+ * Relación: un usuario puede crear muchas guías.
+ */
+public function guides()
+{
+    return $this->hasMany(Guide::class);
+}
+
 }

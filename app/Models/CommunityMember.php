@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -25,5 +25,13 @@ class CommunityMember extends Model
     public function community(): BelongsTo
     {
         return $this->belongsTo(Community::class);
+
     }
+    /**
+ * Relación: una comunidad puede tener muchas publicaciones.
+ */
+public function posts()
+{
+    return $this->hasMany(Post::class);
+}
 }
