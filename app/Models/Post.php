@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Comment;
+use App\Models\Reaction;
 
 class Post extends Model
 {
@@ -37,5 +38,13 @@ class Post extends Model
     public function comments()
 {
     return $this->hasMany(Comment::class);
+
  }
+   /**
+ * Una publicación puede recibir muchas reacciones.
+ */
+public function reactions()
+{
+    return $this->hasMany(Reaction::class);
+}
 }

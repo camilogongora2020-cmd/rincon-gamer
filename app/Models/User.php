@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Reaction;
 use App\Models\Guide;
 use App\Models\Comment;
 use App\Models\Post;
@@ -61,6 +62,13 @@ public function comments()
 public function guides()
 {
     return $this->hasMany(Guide::class);
-}
 
+}
+  /**
+ * Un usuario puede realizar muchas reacciones.
+ */
+public function reactions()
+{
+    return $this->hasMany(Reaction::class);
+}
 }
