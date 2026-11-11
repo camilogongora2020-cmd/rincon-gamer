@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Friend;
 use App\Models\Message;
 use App\Models\Reaction;
 use App\Models\Guide;
@@ -92,4 +93,24 @@ public function receivedMessages()
 {
     return $this->hasMany(Notification::class);
 }
+ /**
+ * Solicitudes de amistad enviadas por el usuario.
+ */
+public function sentFriendRequests()
+{
+    return $this->hasMany(Friend::class, 'requester_id');
+}
+
+/**
+ * Solicitudes de amistad recibidas por el usuario.
+ */
+public function receivedFriendRequests()
+{
+    return $this->hasMany(Friend::class, 'receiver_id');
+}
+protected $fillable = [
+    'name',
+    'email',
+    'password',
+];
 }
