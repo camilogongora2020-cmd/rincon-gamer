@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Notification;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -86,5 +87,9 @@ public function sentMessages()
 public function receivedMessages()
 {
     return $this->hasMany(Message::class, 'receiver_id');
+}
+  public function notifications()
+{
+    return $this->hasMany(Notification::class);
 }
 }
