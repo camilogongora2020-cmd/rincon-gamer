@@ -18,18 +18,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'avatar'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -38,81 +33,51 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Relación: un usuario puede pertenecer a varias comunidades.
-     */
     public function communityMembers()
     {
         return $this->hasMany(CommunityMember::class);
     }
 
-    /**
-     * Relación: un usuario puede crear muchas publicaciones.
-     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
-    /**
-     * Relación: un usuario puede escribir muchos comentarios.
-     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * Relación: un usuario puede crear muchas guías.
-     */
     public function guides()
     {
         return $this->hasMany(Guide::class);
     }
 
-    /**
-     * Un usuario puede realizar muchas reacciones.
-     */
     public function reactions()
     {
         return $this->hasMany(Reaction::class);
     }
 
-    /**
-     * Mensajes enviados por el usuario.
-     */
     public function sentMessages()
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
 
-    /**
-     * Mensajes recibidos por el usuario.
-     */
     public function receivedMessages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }
 
-    /**
-     * Notificaciones del usuario.
-     */
     public function notifications()
     {
         return $this->hasMany(Notification::class);
     }
 
-    /**
-     * Solicitudes de amistad enviadas por el usuario.
-     */
     public function sentFriendRequests()
     {
         return $this->hasMany(Friend::class, 'requester_id');
     }
 
-    /**
-     * Solicitudes de amistad recibidas por el usuario.
-     */
     public function receivedFriendRequests()
     {
         return $this->hasMany(Friend::class, 'receiver_id');

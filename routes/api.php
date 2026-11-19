@@ -16,13 +16,13 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FriendController;
 
-// Controladores de autenticación
+// Controladores de autenticación y perfil
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController as ProfileController;
 
 
 // ========================================
-// RUTAS PUBLICAS
+// RUTAS PÚBLICAS
 // No requieren autenticación
 // ========================================
 
@@ -47,11 +47,14 @@ Route::middleware('auth:sanctum')->group(function () {
     // Cerrar sesión
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-    // Perfil del usuario autenticado
+    // Consultar perfil del usuario autenticado
     Route::get('/users/profile', [ProfileController::class, 'profile']);
 
-    // Actualizar perfil del usuario autenticado
+    // Actualizar nombre y correo del perfil
     Route::put('/users/update', [ProfileController::class, 'update']);
+
+    // Subir o cambiar foto de perfil
+    Route::post('/users/avatar', [ProfileController::class, 'uploadAvatar']);
 
     // CRUD de usuarios
     Route::apiResource('users', UserController::class);

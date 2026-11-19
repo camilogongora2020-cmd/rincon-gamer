@@ -9,13 +9,18 @@ class PostController extends Controller
 {
     /**
      * Mostrar todas las publicaciones.
+     * Incluye los datos y avatar de cada autor.
      */
     public function index()
     {
         $posts = Post::with([
-            'user:id,name',
+            'user:id,name,avatar',
             'community:id,name'
-        ])->get();
+        ])->latest()->get();
+
+        $posts->each(function ($post) {
+            $this->addAvatarUrl($post);
+        });
 
         return response()->json($posts, 200);
     }
@@ -35,6 +40,13 @@ class PostController extends Controller
 
         $post = Post::create($validated);
 
+        $post->load([
+            'user:id,name,avatar',
+            'community:id,name'
+        ]);
+
+        $this->addAvatarUrl($post);
+
         return response()->json([
             'message' => 'Publicación creada correctamente.',
             'post' => $post
@@ -47,9 +59,11 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::with([
-            'user:id,name',
+            'user:id,name,avatar',
             'community:id,name'
         ])->findOrFail($id);
+
+        $this->addAvatarUrl($post);
 
         return response()->json($post, 200);
     }
@@ -71,6 +85,13 @@ class PostController extends Controller
 
         $post->update($validated);
 
+        $post->load([
+            'user:id,name,avatar',
+            'community:id,name'
+        ]);
+
+        $this->addAvatarUrl($post);
+
         return response()->json([
             'message' => 'Publicación actualizada correctamente.',
             'post' => $post
@@ -89,5 +110,17 @@ class PostController extends Controller
         return response()->json([
             'message' => 'Publicación eliminada correctamente.'
         ], 200);
+    }
+
+    /**
+     * Agregar la URL pública del avatar del autor.
+     */
+    private function addAvatarUrl(Post $post): void
+    {
+        if ($post->user) {
+            $post->user->avatar_url = $post->user->avatar
+                ? asset('storage/' . $post->user->avatar)
+                : null;
+        }
     }
 }
