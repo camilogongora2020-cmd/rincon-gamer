@@ -1,27 +1,81 @@
+
+# ==========================================
+# RINCÓN GAMER - CONFIGURACIÓN GENERAL
+# ==========================================
+
+# Archivos de entorno privados
+.env
+.env.*
+!.env.example
+
+# Registros y archivos del sistema
 *.log
 .DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
+Thumbs.db
+
+# Configuraciones locales de editores
 /.codex
 /.cursor/
 /.idea
 /.nova
-/.phpunit.cache
 /.vscode
 /.zed
-/auth.json
-/node_modules
-/public/build
-/public/fonts-manifest.dev.json
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
+.phpactor.json
+
+# Archivos privados
+auth.json
 _ide_helper.php
 Homestead.json
 Homestead.yaml
-Thumbs.db
+
+# ==========================================
+# BACKEND - LARAVEL
+# ==========================================
+
+# Dependencias de PHP
+/backend/vendor/
+
+# Dependencias de JavaScript de Laravel
+/backend/node_modules/
+
+# Archivos generados por Laravel
+/backend/public/build/
+/backend/public/hot
+/backend/public/storage/
+/backend/public/fonts-manifest.dev.json
+
+# Archivos temporales y privados
+/backend/storage/*.key
+/backend/storage/pail/
+/backend/bootstrap/cache/*.php
+
+# Pruebas
+.phpunit.result.cache
+.phpunit.cache/
+
+# ==========================================
+# FRONTEND - REACT Y VITE
+# ==========================================
+
+# Dependencias
+/frontend/node_modules/
+
+# Archivos compilados
+/frontend/dist/
+
+# Archivos temporales
+/frontend/.vite/
+
+# ==========================================
+# ARCHIVOS ANTIGUOS EN LA RAÍZ
+# ==========================================
+
+# Dependencias de la estructura anterior
+/vendor/
+/node_modules/
+
+# Archivos generados de la estructura anterior
+/public/build/
+/public/hot
+/public/storage/
+
